@@ -24,8 +24,8 @@ def runGame():
   gameIsOver = False
   renderTable()
 
-  namePlayer1 = input("\u001b[34m Nome Player1 (X): ")
-  namePlayer2 = input("\u001b[33m Nome Player2 (O): ")
+  namePlayer1 = input("\u001b[34m Player1 name (X): ")
+  namePlayer2 = input("\u001b[33m Player2 name (O): ")
   
   names = {'x': namePlayer1, 'o': namePlayer2}
   
@@ -36,12 +36,12 @@ def runGame():
   while (playing):
     allFilled = False
     if player == 'x':
-        jogada = input(f"\u001b[34m Jogada de {names['x']}: ")
+        jogada = input(f"\u001b[34m Player's {names['x']} move: ")
         jogar(jogada, 'x')
         player = 'o'
 
     elif player == 'o':
-        jogada = input(f"\u001b[33m Jogada de {names['o']}: ")
+        jogada = input(f"\u001b[33m Player's {names['o']} move: ")
         jogar(jogada, 'o')
         player = 'x'
     
@@ -64,11 +64,11 @@ def runGame():
                     allFilled = False
 
     if allFilled:
-        print(f'\u001b[31mDeu velha')
+        print(f"\u001b[31mIt's a draw!")
         gameIsOver = True
         
     if gameIsOver:
-        playAgain = input('Play again? (S/Sim - N/Nao)-> ').lower()
+        playAgain = input('Play again? (Y/Yes - N/No)-> ').lower()
 
         if playAgain == 's' or playAgain == 'sim':
             clearTable()
@@ -76,7 +76,7 @@ def runGame():
             runGame()
         elif playAgain == 'n' or playAgain == 'nao':
               os.system('cls')
-              print("Fechando DjBlakes...")
+              print("exiting...")
               break
               SystemExit
         
