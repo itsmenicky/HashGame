@@ -1,5 +1,6 @@
 import os
 import time
+import sys
 from functions import *
 
 os.system('cls')
@@ -19,7 +20,9 @@ print("                                 \u001b[31m||     ||  O  ||  X  ||\n")
 time.sleep(2)
 os.system('cls')
 
-
+"""
+Function responsible for executing the game
+"""
 def runGame():
   gameIsOver = False
   renderTable()
@@ -36,13 +39,13 @@ def runGame():
   while (playing):
     allFilled = False
     if player == 'x':
-        jogada = input(f"\u001b[34m Player's {names['x']} move: ")
-        jogar(jogada, 'x')
+        move = input(f"\u001b[34m Player's {names['x']} move: ")
+        play(move, 'x')
         player = 'o'
 
     elif player == 'o':
-        jogada = input(f"\u001b[33m Player's {names['o']} move: ")
-        jogar(jogada, 'o')
+        move = input(f"\u001b[33m Player's {names['o']} move: ")
+        play(move, 'o')
         player = 'x'
     
     
@@ -50,10 +53,10 @@ def runGame():
 
 
     if(checkGame(game) and checkGame(game) == 'x'):
-        ganhou('x')
+        win('x')
         gameIsOver = True
     elif(checkGame(game) and checkGame(game) == 'o'):
-        ganhou('o')
+        win('o')
         gameIsOver = True
     
     for line in game:
@@ -70,14 +73,17 @@ def runGame():
     if gameIsOver:
         playAgain = input('Play again? (Y/Yes - N/No)-> ').lower()
 
-        if playAgain == 's' or playAgain == 'sim':
+        if playAgain == 'y' or playAgain == 'yes':
             clearTable()
             renderTable()
             runGame()
-        elif playAgain == 'n' or playAgain == 'nao':
+            break
+        elif playAgain == 'n' or playAgain == 'no':
               os.system('cls')
               print("exiting...")
-              break
-              SystemExit
+              sys.exit()
+        else:
+            print("invalid option! exiting...")
+            sys.exit()
         
 runGame()

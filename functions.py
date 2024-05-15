@@ -18,32 +18,32 @@ def readPlay(play):
   col = int(play.split(' ')[1])
   pos = int(play.split(' ')[3])
   if(col > 3 or pos > 3):
-    jogada = input("\u001b[31m Digite uma jogada válida (col e line de 1 a 3): ")
-    readPlay(jogada)
+    move = input("\u001b[31m Digite uma move válida (col e line de 1 a 3): ")
+    readPlay(move)
   return [col-1, pos-1]
 
 """
 Function responsible for receive a Player and print victory screen, mapping player color on each play
 """
-def ganhou(jogador):
+def win(player):
     os.system('cls')
     # Atribui uma cor para função
     cor = "\u001b[37m"
-    if jogador == 'x':
+    if player == 'x':
       cor = "\u001b[34m"
-    elif jogador == 'o':
+    elif player == 'o':
       cor = "\u001b[33m"   
 
     color_mapping = []
 
     for line in game:
       for item in line:
-        if item == jogador:
+        if item == player:
             color_mapping.append(cor)
         else:
             color_mapping.append('\u001b[37m') # <- branco
 
-    print(f"                              \u001b[32m|**{jogador} venceu!**|\n")
+    print(f"                              \u001b[32m|**{player} venceu!**|\n")
     print(f"                                {color_mapping[0]}{game[0][0].upper()} \u001b[37m |  {color_mapping[1]}{game[0][1].upper()}  \u001b[37m|  {color_mapping[2]}{game[0][2].upper()} \u001b[37m \n")
     time.sleep(1)
     print(f"                             ------|-----|------\n")
@@ -102,19 +102,19 @@ def checkLine(pos):
 """
 Function responsible for receive a play and a Player, split play into column and position and verify if the position are available
 """
-def jogar(jogada, jogador):
-  if(len(jogada.split(' ')) < 4):
+def play(move, player):
+  if(len(move.split(' ')) < 4):
      return
-  pos = readPlay(jogada)[1]
-  col = readPlay(jogada)[0]
+  pos = readPlay(move)[1]
+  col = readPlay(move)[0]
   game_line = game[pos]
   if game_line[col] != " ":
-     jogada = input("\u001b[31m Escolha uma posição vazia para jogar: ")
-     return jogar(jogada, jogador)
-  game[pos][col] = jogador
+     move = input("\u001b[31m Escolha uma posição vazia para jogar: ")
+     return play(move, player)
+  game[pos][col] = player
 
 """
-Function responsible for print table map and current game table
+Function responsible for print table map and current game map
 """
 def renderTable():
   os.system('cls')
