@@ -4,11 +4,16 @@ import numpy as np
 
 game = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
 
+"""
+Function responsible for changing all list values to an empty string
+"""
 def clearTable():
   global game
   game = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
 
-
+"""
+Function responsible for reading play input and split into column and position, returning the current player's column and position
+"""
 def readPlay(play):
   col = int(play.split(' ')[1])
   pos = int(play.split(' ')[3])
@@ -17,6 +22,9 @@ def readPlay(play):
     readPlay(jogada)
   return [col-1, pos-1]
 
+"""
+Function responsible for receive a Player and print victory screen, mapping player color on each play
+"""
 def ganhou(jogador):
     os.system('cls')
     # Atribui uma cor para função
@@ -47,7 +55,9 @@ def ganhou(jogador):
     print(f"                                {color_mapping[6]}{game[2][0].upper()}  \u001b[37m|  {color_mapping[7]}{game[2][1].upper()} \u001b[37m |  {color_mapping[8]}{game[2][2].upper()} \u001b[37m \n")
     time.sleep(2)
 
-
+"""
+Function responsible for checking all lines and diagonals
+"""
 def checkGame(table):
 
   #print(table)
@@ -79,6 +89,9 @@ def checkGame(table):
   if checkLine(diagonal2):
     return checkLine(diagonal2)
 
+"""
+Function responsible for checking if play values are 'x' or 'o'
+"""
 def checkLine(pos):
   if(all(el == 'x' for el in pos)):
     return 'x'
@@ -86,6 +99,9 @@ def checkLine(pos):
     return 'o'
   return False
 
+"""
+Function responsible for receive a play and a Player, split play into column and position and verify if the position are available
+"""
 def jogar(jogada, jogador):
   if(len(jogada.split(' ')) < 4):
      return
@@ -97,6 +113,9 @@ def jogar(jogada, jogador):
      return jogar(jogada, jogador)
   game[pos][col] = jogador
 
+"""
+Function responsible for print table map and current game table
+"""
 def renderTable():
   os.system('cls')
   print(f"\u001b[33m ==========MAPA DO TABULEIRO==========         \u001b[34m===========GAME==========\n")
